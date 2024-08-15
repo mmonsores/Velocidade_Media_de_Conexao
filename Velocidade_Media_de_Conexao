@@ -1,0 +1,50 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+
+public class CalculadoraVelocidadeMedia {
+
+    public static void main(String[] args) {
+        // Cria um BufferedReader para ler a entrada do usuário
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        try {
+            // Lê a linha de entrada
+            String entrada = br.readLine();
+            
+            // Calcula a velocidade média
+            double media = calcularMedia(entrada);
+            
+            // Exibe o resultado formatado com a unidade "Mbps"
+            System.out.println((int) media + " Mbps");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Calcula a média das velocidades fornecidas na string de entrada.
+     * 
+     * @param entrada A string contendo as velocidades separadas por vírgula
+     * @return A velocidade média arredondada
+     */
+    public static double calcularMedia(String entrada) {
+        // Divide a string de entrada em um array de strings
+        String[] velocidades = entrada.split(",");
+        
+        // Variáveis para somar as velocidades e contar o número de registros
+        int soma = 0;
+        int contador = 0;
+        
+        // Itera sobre o array de strings
+        for (String velocidade : velocidades) {
+            // Remove espaços em branco e converte para inteiro
+            soma += Integer.parseInt(velocidade.trim());
+            contador++;
+        }
+        
+        // Calcula e retorna a média arredondada
+        double media = (double) soma / contador;
+        return Math.round(media);
+    }
+}
